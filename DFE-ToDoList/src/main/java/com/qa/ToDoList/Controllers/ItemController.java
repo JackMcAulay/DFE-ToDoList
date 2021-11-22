@@ -28,7 +28,7 @@ public class ItemController {
 	@PostMapping("/createNote")
 	public String create(@RequestBody Item item) {
 		service.create(item);
-		return "User Added";
+		return "Note Added";
 	}
 	
 	@GetMapping("/readAllNotes")
