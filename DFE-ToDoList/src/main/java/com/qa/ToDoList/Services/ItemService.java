@@ -34,13 +34,7 @@ public class ItemService {
 		return dto;
 	}
 	
-	public ItemDTO create(Item item) {
-		itemRepo.save(item);
-		return this.mapToDTO(item);
-	}
-	
-	public List<ItemDTO> readAll() {
-		List<Item> items = itemRepo.findAll();
+	public List<ItemDTO> listDTOs (List<Item> items) {
 		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
 		for (Item item : items) {
 			itemDTOs.add(mapToDTO(item));
@@ -49,12 +43,18 @@ public class ItemService {
 		return itemDTOs;
 	}
 	
+	public ItemDTO create(Item item) {
+		itemRepo.save(item);
+		return this.mapToDTO(item);
+	}
+	
+	public List<ItemDTO> readAll() {
+		List<Item> items = itemRepo.findAll();
+		return listDTOs(items);
+	}
+	
 	public List<ItemDTO> readAllByUser(long userId) {
 		List<Item> items = itemRepo.findAllByUserId(userId);
-		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
-		for (Item item : items) {
-			itemDTOs.add(mapToDTO(item));
-		}
-		return itemDTOs;
+		return listDTOs(items);
 	}
 }
