@@ -32,6 +32,7 @@ public class ItemService {
 		dto.setItemContents(item.getItemContents());
 		dto.setDateCreated(item.getDateCreated());
 		dto.setDateDue(item.getDateDue());
+		dto.setStatus(item.getStatus());
 		return dto;
 	}
 	

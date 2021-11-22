@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.qa.ToDoList.Enums.Status;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +36,9 @@ public class Item {
 	
 	@Column
 	private Date dateDue;
+	
+	@Column
+	private Status status = Status.DUE;
 
 	public Item(long iD, String itemTitle, String itemContents, Date dueDate) {
 		super();
