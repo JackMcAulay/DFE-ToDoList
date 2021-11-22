@@ -29,8 +29,8 @@ public class ItemService {
 		dto.setItemAuthor(userRepo.findUserByID(item.getUserId()).getName());
 		dto.setItemTitle(item.getItemTitle());
 		dto.setItemContents(item.getItemContents());
-		dto.setDueDate(item.getDueDate());
 		dto.setDateCreated(item.getDateCreated());
+		dto.setDateDue(item.getDateDue());
 		return dto;
 	}
 	

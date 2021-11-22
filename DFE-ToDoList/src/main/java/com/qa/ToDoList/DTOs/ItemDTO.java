@@ -10,8 +10,8 @@ public class ItemDTO {
 	private String itemAuthor;
 	private String itemTitle;
 	private String itemContents;
-	private Date dueDate;
 	private Date dateCreated;
+	private Date dateDue;
 	
 	public ItemDTO() {
         super();

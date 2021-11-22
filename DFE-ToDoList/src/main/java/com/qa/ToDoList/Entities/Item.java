@@ -30,16 +30,16 @@ public class Item {
 	private String itemContents;
 	
 	@Column
-	private Date dueDate;
+	private Date dateCreated = new Date(System.currentTimeMillis());
 	
 	@Column
-	private Date dateCreated = new Date(System.currentTimeMillis());
+	private Date dateDue;
 
 	public Item(long iD, String itemTitle, String itemContents, Date dueDate) {
 		super();
 		ID = iD;
 		this.itemTitle = itemTitle;
 		this.itemContents = itemContents;
-		this.dueDate = dueDate;
+		this.dateDue = dueDate;
 	}
 }
