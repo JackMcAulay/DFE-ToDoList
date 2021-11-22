@@ -1,7 +1,6 @@
 package com.qa.ToDoList.Controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -38,24 +37,24 @@ public class UserController {
 		return "Users Added";
 	}
 	
-	@GetMapping("/readAll")
+	@GetMapping("/readAllUsers")
 	public List<User> readAll() {
 	    return service.readAll();
 	}
 	
-	@GetMapping("/readById/{id}")
+	@GetMapping("/readUserById/{id}")
 	public User readById(@PathVariable long id){
 		return service.readById(id);
 	}
 	
-	@PostMapping("update/{id}")
+	@PostMapping("updateUser/{id}")
 	public String update(@PathVariable long id, @RequestBody User u) {
 		service.delete(service.readById(id));
 		service.create(u);
 		return "User Updated";
 	}
 	
-	@PostMapping("delete/{id}")
+	@PostMapping("deleteUser/{id}")
 	public String delete(@PathVariable long id) {
 		service.delete(service.readById(id));
 		return "User Deleted";

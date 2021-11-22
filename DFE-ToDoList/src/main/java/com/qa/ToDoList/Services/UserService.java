@@ -1,15 +1,16 @@
 package com.qa.ToDoList.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Entities.UserRepository;
 
+@Service
 public class UserService {
 
 	private UserRepository repo;
