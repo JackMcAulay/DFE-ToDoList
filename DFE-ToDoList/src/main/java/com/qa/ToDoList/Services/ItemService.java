@@ -1,5 +1,8 @@
 package com.qa.ToDoList.Services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +37,14 @@ public class ItemService {
 	public ItemDTO create(Item item) {
 		itemRepo.save(item);
 		return this.mapToDTO(item);
+	}
+	
+	public List<ItemDTO> readAll() {
+		List<Item> items = itemRepo.findAll();
+		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
+		for (Item item : items) {
+			itemDTOs.add(mapToDTO(item));
+		}
+		return itemDTOs;
 	}
 }
