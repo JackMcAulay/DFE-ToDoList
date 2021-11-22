@@ -21,6 +21,9 @@ public class Item {
 	private long ID;
 	
 	@Column
+	private long userId;
+	
+	@Column
 	private String itemTitle;
 	
 	@Column
