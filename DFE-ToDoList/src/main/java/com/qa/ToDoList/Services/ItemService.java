@@ -26,6 +26,7 @@ public class ItemService {
 	
 	public ItemDTO mapToDTO(Item item) {
 		ItemDTO dto = new ItemDTO();
+		dto.setID(item.getID());
 		dto.setItemAuthor(userRepo.findUserByID(item.getUserId()).getName());
 		dto.setItemTitle(item.getItemTitle());
 		dto.setItemContents(item.getItemContents());

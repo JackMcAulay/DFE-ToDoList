@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ItemDTO {
 	
+	private long ID;
 	private String itemAuthor;
 	private String itemTitle;
 	private String itemContents;
