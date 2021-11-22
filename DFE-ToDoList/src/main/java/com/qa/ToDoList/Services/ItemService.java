@@ -44,6 +44,16 @@ public class ItemService {
 		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
 		for (Item item : items) {
 			itemDTOs.add(mapToDTO(item));
+			System.out.println(item);
+		}
+		return itemDTOs;
+	}
+	
+	public List<ItemDTO> readAllByUser(long userId) {
+		List<Item> items = itemRepo.findAllByUserId(userId);
+		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
+		for (Item item : items) {
+			itemDTOs.add(mapToDTO(item));
 		}
 		return itemDTOs;
 	}

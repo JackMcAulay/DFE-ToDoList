@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,14 +26,19 @@ public class ItemController {
 		this.service = service;
 	}
 	
-	@PostMapping("/createNote")
+	@PostMapping("/createItem")
 	public String create(@RequestBody Item item) {
 		service.create(item);
-		return "Note Added";
+		return "Item Added";
 	}
 	
-	@GetMapping("/readAllNotes")
+	@GetMapping("/readAllItem")
 	public List<ItemDTO> readAll() {
 	    return service.readAll();
+	}
+	
+	@GetMapping("/readAllItemByUser/{id}")
+	public List<ItemDTO> readAllByUser(@PathVariable long id) {
+	    return service.readAllByUser(id);
 	}
 }
