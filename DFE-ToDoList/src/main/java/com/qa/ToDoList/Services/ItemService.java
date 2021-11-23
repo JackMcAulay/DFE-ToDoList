@@ -3,6 +3,8 @@ package com.qa.ToDoList.Services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,10 @@ public class ItemService {
 	public List<ItemDTO> readAll() {
 		List<Item> items = itemRepo.findAll();
 		return listDTOs(items);
+	}
+	
+	public Item readById(long id) {
+		return itemRepo.findById(id).orElseThrow(EntityNotFoundException::new);
 	}
 	
 	public List<ItemDTO> readAllByUser(long userId) {
