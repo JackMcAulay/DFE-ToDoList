@@ -57,6 +57,12 @@ public class ItemController {
 		return service.completeItem(itemId);
 	}
 	
+	@PostMapping("/updateItem/{itemId}")
+	public ItemDTO updateItem(@PathVariable long itemId, @RequestBody Item item) {
+		service.delete(itemId);
+		return service.create(item);
+	}
+	
 	@PostMapping("/deleteItem/{itemId}")
 	public String deleteItem(@PathVariable long itemId) {
 		service.delete(itemId);
