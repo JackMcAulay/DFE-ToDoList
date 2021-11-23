@@ -37,18 +37,29 @@ public class ItemController {
 	    return service.readAll();
 	}
 	
+	@GetMapping("/readItemById/{itemId}")
+	public ItemDTO readItemById(@PathVariable long itemId) {
+	    return service.readById(itemId);
+	}
+	
 	@GetMapping("/readAllItemByUser/{userId}")
 	public List<ItemDTO> readAllByUser(@PathVariable long userId) {
 	    return service.readAllByUser(userId);
 	}
 	
-	@GetMapping("/readAllByStatus/{state}")
-	public List<ItemDTO> readAllByStatus(@PathVariable Status state) {
-	    return service.readAllByStatus(state);
+	@GetMapping("/readAllByStatus/{userId}/{state}")
+	public List<ItemDTO> readAllByStatus(@PathVariable long userId, @PathVariable Status state) {
+	    return service.readAllByStatus(userId, state);
 	}
 	
 	@PostMapping("/completeItem/{itemId}")
 	public ItemDTO completeItem(@PathVariable long itemId) {
 		return service.completeItem(itemId);
+	}
+	
+	@PostMapping("/deleteItem/{itemId}")
+	public String deleteItem(@PathVariable long itemId) {
+		service.delete(itemId);
+		return "Item " + itemId + " Deleted";
 	}
 }

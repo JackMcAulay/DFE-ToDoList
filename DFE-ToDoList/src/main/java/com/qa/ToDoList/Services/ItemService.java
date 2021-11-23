@@ -57,25 +57,25 @@ public class ItemService {
 		return listDTOs(items);
 	}
 	
-	public Item readById(long itemId) {
-		return itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new);
+	public ItemDTO readById(long itemId) {
+		return this.mapToDTO(itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new));
 	}
 	
 	public List<ItemDTO> readAllByUser(long userId) {
 		List<Item> items = itemRepo.findAllByUserId(userId);
-		return listDTOs(items);
+		return this.listDTOs(items);
 	}
 	
-	public List<ItemDTO> readAllByStatus(Status state){
-		List<Item> items = itemRepo.findAllByStatus(state);
-		return listDTOs(items);
+	public List<ItemDTO> readAllByStatus(long userId, Status state){
+		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
+		return this.listDTOs(items);
 	}
 	
 	public ItemDTO completeItem(long itemId) {
 		Item item = itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new);
 		item.setStatus(Status.COMPLETED);
 		itemRepo.save(item);
-		return mapToDTO(item);
+		return this.mapToDTO(item);
 	}
 	
 	public void delete(long id) {
