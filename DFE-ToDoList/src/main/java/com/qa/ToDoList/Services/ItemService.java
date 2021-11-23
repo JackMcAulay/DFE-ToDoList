@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.qa.ToDoList.DTOs.ItemDTO;
 import com.qa.ToDoList.Entities.Item;
 import com.qa.ToDoList.Entities.ItemRepository;
-import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Entities.UserRepository;
+import com.qa.ToDoList.Enums.Status;
 
 @Service
 public class ItemService {
@@ -61,7 +61,12 @@ public class ItemService {
 		return listDTOs(items);
 	}
 	
-	public void delete(Item id) {
+	public List<ItemDTO> readAllByStatus(Status state){
+		List<Item> items = itemRepo.findAllByStatus(state);
+		return listDTOs(items);
+	}
+	
+	public void delete(long id) {
 		itemRepo.deleteById(id);
 	}
 }

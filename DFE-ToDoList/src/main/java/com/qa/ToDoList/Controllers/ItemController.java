@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.ToDoList.DTOs.ItemDTO;
 import com.qa.ToDoList.Entities.Item;
+import com.qa.ToDoList.Enums.Status;
 import com.qa.ToDoList.Services.ItemService;
 
 @RestController
@@ -40,5 +41,10 @@ public class ItemController {
 	@GetMapping("/readAllItemByUser/{id}")
 	public List<ItemDTO> readAllByUser(@PathVariable long id) {
 	    return service.readAllByUser(id);
+	}
+	
+	@GetMapping("/readAllByStatus/{state}")
+	public List<ItemDTO> readAllByUser(@PathVariable Status state) {
+	    return service.readAllByStatus(state);
 	}
 }
