@@ -1,8 +1,11 @@
 package com.qa.ToDoList.Entities;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,12 +42,17 @@ public class Item {
 	
 	@Column
 	private Status status = Status.DUE;
+	
+	@ElementCollection
+    @CollectionTable(name="listOfTags")
+	private List<String> tags;
 
-	public Item(long iD, String itemTitle, String itemContents, Date dueDate) {
+	public Item(long iD, String itemTitle, String itemContents, Date dueDate, List<String> tags) {
 		super();
 		ID = iD;
 		this.itemTitle = itemTitle;
 		this.itemContents = itemContents;
 		this.dateDue = dueDate;
+		this.tags = tags;
 	}
 }

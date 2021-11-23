@@ -38,6 +38,7 @@ public class ItemService {
 		dto.setDateCreated(item.getDateCreated());
 		dto.setDateDue(item.getDateDue());
 		dto.setStatus(item.getStatus());
+		dto.setTags(item.getTags());
 		return dto;
 	}
 	
