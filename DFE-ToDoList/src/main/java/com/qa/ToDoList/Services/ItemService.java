@@ -42,7 +42,7 @@ public class ItemService {
 	public List<ItemDTO> listDTOs (List<Item> items) {
 		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
 		for (Item item : items) {
-			itemDTOs.add(mapToDTO(item));
+			itemDTOs.add(this.mapToDTO(item));
 		}
 		return itemDTOs;
 	}
