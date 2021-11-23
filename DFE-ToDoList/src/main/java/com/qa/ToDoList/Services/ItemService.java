@@ -43,7 +43,6 @@ public class ItemService {
 		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
 		for (Item item : items) {
 			itemDTOs.add(mapToDTO(item));
-			System.out.println(item);
 		}
 		return itemDTOs;
 	}
@@ -58,8 +57,8 @@ public class ItemService {
 		return listDTOs(items);
 	}
 	
-	public Item readById(long id) {
-		return itemRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+	public Item readById(long itemId) {
+		return itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new);
 	}
 	
 	public List<ItemDTO> readAllByUser(long userId) {
@@ -70,6 +69,13 @@ public class ItemService {
 	public List<ItemDTO> readAllByStatus(Status state){
 		List<Item> items = itemRepo.findAllByStatus(state);
 		return listDTOs(items);
+	}
+	
+	public ItemDTO completeItem(long itemId) {
+		Item item = itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new);
+		item.setStatus(Status.COMPLETED);
+		itemRepo.save(item);
+		return mapToDTO(item);
 	}
 	
 	public void delete(long id) {

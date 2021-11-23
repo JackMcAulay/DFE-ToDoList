@@ -28,9 +28,8 @@ public class ItemController {
 	}
 	
 	@PostMapping("/createItem")
-	public String create(@RequestBody Item item) {
-		service.create(item);
-		return "Item Added";
+	public ItemDTO create(@RequestBody Item item) {
+		return service.create(item);
 	}
 	
 	@GetMapping("/readAllItem")
@@ -38,13 +37,18 @@ public class ItemController {
 	    return service.readAll();
 	}
 	
-	@GetMapping("/readAllItemByUser/{id}")
-	public List<ItemDTO> readAllByUser(@PathVariable long id) {
-	    return service.readAllByUser(id);
+	@GetMapping("/readAllItemByUser/{userId}")
+	public List<ItemDTO> readAllByUser(@PathVariable long userId) {
+	    return service.readAllByUser(userId);
 	}
 	
 	@GetMapping("/readAllByStatus/{state}")
-	public List<ItemDTO> readAllByUser(@PathVariable Status state) {
+	public List<ItemDTO> readAllByStatus(@PathVariable Status state) {
 	    return service.readAllByStatus(state);
+	}
+	
+	@PostMapping("/completeItem/{itemId}")
+	public ItemDTO completeItem(@PathVariable long itemId) {
+		return service.completeItem(itemId);
 	}
 }
