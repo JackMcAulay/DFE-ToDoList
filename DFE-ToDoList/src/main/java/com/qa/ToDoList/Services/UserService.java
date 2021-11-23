@@ -25,7 +25,8 @@ public class UserService {
 	
 	public UserDTO mapToDTO(User user) {
 		UserDTO dto = new UserDTO();
-		dto.setName(user.getName());
+		dto.setID(user.getID());
+		dto.setFullName(user.getFirstName() + " " + user.getLastName());
 		dto.setEmail(user.getEmail());
 		return dto;
 	}
@@ -60,7 +61,8 @@ public class UserService {
 	
 	public UserDTO update(long id, User updatedUser) {
 		User user = repo.findById(id).orElseThrow(EntityNotFoundException::new);
-		user.setName(updatedUser.getName());
+		user.setFirstName(updatedUser.getFirstName());
+		user.setLastName(updatedUser.getLastName());
 		user.setEmail(updatedUser.getEmail());
 		repo.save(user);
 		return this.mapToDTO(user);
