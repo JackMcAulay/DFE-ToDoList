@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qa.ToDoList.DTOs.UserDTO;
 import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Services.UserService;
 
@@ -26,35 +27,31 @@ public class UserController {
 	}
 	
 	@PostMapping("/createUser")
-	public String create(@RequestBody User user) {
-		service.create(user);
-		return "User Added";
+	public UserDTO create(@RequestBody User user) {
+		return service.create(user);
 	}
 	
 	@PostMapping("/createUsers")
-	public String createMultiple(@RequestBody List<User> uList) {
-		service.createMultiple(uList);
-		return "Users Added";
+	public List<UserDTO> createMultiple(@RequestBody List<User> uList) {
+		return service.createMultiple(uList);
 	}
 	
 	@GetMapping("/readAllUsers")
-	public List<User> readAll() {
+	public List<UserDTO> readAll() {
 	    return service.readAll();
 	}
 	
-	@GetMapping("/readUserById/{id}")
-	public User readById(@PathVariable long id){
-		return service.readById(id);
+	@GetMapping("/readUserById/{userId}")
+	public UserDTO readById(@PathVariable long userId){
+		return service.readById(userId);
 	}
 	
-	@PostMapping("updateUser/{id}")
-	public String update(@PathVariable long userId, @RequestBody User user) {
-		service.delete(userId);
-		service.create(user);
-		return "User Updated";
+	@PostMapping("updateUser/{userId}")
+	public UserDTO update(@PathVariable long userId, @RequestBody User user) {
+		return service.update(userId, user);
 	}
 	
-	@PostMapping("deleteUser/{id}")
+	@PostMapping("deleteUser/{userId}")
 	public String delete(@PathVariable long userId) {
 		service.delete(userId);
 		return "User Deleted";

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.ToDoList.DTOs.ItemDTO;
 import com.qa.ToDoList.Entities.Item;
+import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Entities.ItemRepository;
 import com.qa.ToDoList.Entities.UserRepository;
 import com.qa.ToDoList.Enums.Status;
@@ -29,8 +30,9 @@ public class ItemService {
 	
 	public ItemDTO mapToDTO(Item item) {
 		ItemDTO dto = new ItemDTO();
+		User user = userRepo.findUserByID(item.getUserId());
 		dto.setID(item.getID());
-		dto.setItemAuthor(userRepo.findUserByID(item.getUserId()).getName());
+		dto.setItemAuthor(user.getFirstName() + " " + user.getLastName());
 		dto.setItemTitle(item.getItemTitle());
 		dto.setItemContents(item.getItemContents());
 		dto.setDateCreated(item.getDateCreated());
@@ -42,7 +44,7 @@ public class ItemService {
 	public List<ItemDTO> listDTOs (List<Item> items) {
 		List<ItemDTO> itemDTOs = new ArrayList<ItemDTO>();
 		for (Item item : items) {
-			itemDTOs.add(mapToDTO(item));
+			itemDTOs.add(this.mapToDTO(item));
 		}
 		return itemDTOs;
 	}
