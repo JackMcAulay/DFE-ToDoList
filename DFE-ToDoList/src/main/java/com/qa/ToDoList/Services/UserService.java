@@ -39,7 +39,7 @@ public class UserService {
 		return repo.findById(id).orElseThrow(EntityNotFoundException::new);
 	}
 	
-	public void delete(User u) {
-		repo.deleteById(u.getID());
+	public void delete(long userId) {
+		repo.deleteById(userId);
 	}
 }

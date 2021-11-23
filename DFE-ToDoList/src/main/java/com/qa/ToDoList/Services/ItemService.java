@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.qa.ToDoList.DTOs.ItemDTO;
 import com.qa.ToDoList.Entities.Item;
 import com.qa.ToDoList.Entities.ItemRepository;
+import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Entities.UserRepository;
 
 @Service
@@ -58,5 +59,9 @@ public class ItemService {
 	public List<ItemDTO> readAllByUser(long userId) {
 		List<Item> items = itemRepo.findAllByUserId(userId);
 		return listDTOs(items);
+	}
+	
+	public void delete(Item id) {
+		itemRepo.deleteById(id);
 	}
 }
