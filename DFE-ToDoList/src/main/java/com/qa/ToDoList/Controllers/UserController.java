@@ -48,15 +48,15 @@ public class UserController {
 	}
 	
 	@PostMapping("updateUser/{id}")
-	public String update(@PathVariable long id, @RequestBody User u) {
-		service.delete(service.readById(id));
-		service.create(u);
+	public String update(@PathVariable long userId, @RequestBody User user) {
+		service.delete(userId);
+		service.create(user);
 		return "User Updated";
 	}
 	
 	@PostMapping("deleteUser/{id}")
-	public String delete(@PathVariable long id) {
-		service.delete(service.readById(id));
+	public String delete(@PathVariable long userId) {
+		service.delete(userId);
 		return "User Deleted";
 	}
 }
