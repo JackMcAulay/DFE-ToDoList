@@ -1,6 +1,7 @@
 package com.qa.ToDoList.DTOs;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.qa.ToDoList.Enums.Status;
 
@@ -16,6 +17,7 @@ public class ItemDTO {
 	private Date dateCreated;
 	private Date dateDue;
 	private Status status;
+	private List<String> tags;
 	
 	public ItemDTO() {
         super();

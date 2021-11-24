@@ -1,5 +1,8 @@
 package com.qa.ToDoList.Services;
 
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,7 @@ public class ItemService {
 		dto.setDateCreated(item.getDateCreated());
 		dto.setDateDue(item.getDateDue());
 		dto.setStatus(item.getStatus());
+		dto.setTags(item.getTags());
 		return dto;
 	}
 	
@@ -55,21 +59,38 @@ public class ItemService {
 	}
 	
 	public List<ItemDTO> readAll() {
+		this.updateStatus();
 		List<Item> items = itemRepo.findAll();
 		return listDTOs(items);
 	}
 	
 	public ItemDTO readById(long itemId) {
+		this.updateStatus();
 		return this.mapToDTO(itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new));
 	}
 	
 	public List<ItemDTO> readAllByUser(long userId) {
+		this.updateStatus();
 		List<Item> items = itemRepo.findAllByUserId(userId);
 		return this.listDTOs(items);
 	}
 	
 	public List<ItemDTO> readAllByStatus(long userId, Status state){
+		this.updateStatus();
 		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
+		return this.listDTOs(items);
+	}
+	
+	public List<ItemDTO> readAllByTag(long userId, String tag){
+		this.updateStatus();
+		List<Item> items = new ArrayList<Item>();
+		List<Item> allItems = itemRepo.findAllByUserId(userId);
+		for (Item item : allItems) {
+			System.out.println(item.getTags());
+			if (item.getTags().contains(tag)) {
+				items.add(item);
+			}
+		}
 		return this.listDTOs(items);
 	}
 	
@@ -78,6 +99,26 @@ public class ItemService {
 		item.setStatus(Status.COMPLETED);
 		itemRepo.save(item);
 		return this.mapToDTO(item);
+	}
+	
+	public void updateStatus() {
+		List<Item> items = itemRepo.findAllByStatus(Status.DUE);
+		items.addAll(itemRepo.findAllByStatus(Status.DUETODAY));
+		
+		LocalDate localDate = LocalDate.now();
+        Date currentDate = (Date) Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		
+		for (Item item : items) {
+			int dif = item.getDateDue().compareTo(currentDate);
+            if (dif == 0 && item.getStatus() != Status.DUETODAY){
+                item.setStatus(Status.DUETODAY);
+                itemRepo.save(item);
+            } else if (dif < 0){
+            	item.setStatus(Status.LATE);
+                itemRepo.save(item);
+			}
+		}
 	}
 	
 	public void delete(long id) {

@@ -52,6 +52,11 @@ public class ItemController {
 	    return service.readAllByStatus(userId, state);
 	}
 	
+	@GetMapping("/readAllByTag/{userId}/{tag}")
+	public List<ItemDTO> readAllByStatus(@PathVariable long userId, @PathVariable String tag) {
+	    return service.readAllByTag(userId, tag);
+	}
+	
 	@PostMapping("/completeItem/{itemId}")
 	public ItemDTO completeItem(@PathVariable long itemId) {
 		return service.completeItem(itemId);
