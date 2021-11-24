@@ -1,5 +1,7 @@
 package com.qa.ToDoList.Services;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class ItemService {
 
 	private UserRepository userRepo;
 	private ItemRepository itemRepo;
+	
+	private SimpleDateFormat formatter= new SimpleDateFormat("MM-dd");
 	
 	@Autowired
 	public ItemService(UserRepository userRepo, ItemRepository itemRepo) {
@@ -56,25 +60,30 @@ public class ItemService {
 	}
 	
 	public List<ItemDTO> readAll() {
+		this.updateStatus();
 		List<Item> items = itemRepo.findAll();
 		return listDTOs(items);
 	}
 	
 	public ItemDTO readById(long itemId) {
+		this.updateStatus();
 		return this.mapToDTO(itemRepo.findById(itemId).orElseThrow(EntityNotFoundException::new));
 	}
 	
 	public List<ItemDTO> readAllByUser(long userId) {
+		this.updateStatus();
 		List<Item> items = itemRepo.findAllByUserId(userId);
 		return this.listDTOs(items);
 	}
 	
 	public List<ItemDTO> readAllByStatus(long userId, Status state){
+		this.updateStatus();
 		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
 		return this.listDTOs(items);
 	}
 	
 	public List<ItemDTO> readAllByTag(long userId, String tag){
+		this.updateStatus();
 		List<Item> items = new ArrayList<Item>();
 		List<Item> allItems = itemRepo.findAllByUserId(userId);
 		for (Item item : allItems) {
@@ -91,6 +100,18 @@ public class ItemService {
 		item.setStatus(Status.COMPLETED);
 		itemRepo.save(item);
 		return this.mapToDTO(item);
+	}
+	
+	public void updateStatus() {
+		Date current = new Date(System.currentTimeMillis());
+		List<Item> items = itemRepo.findAllByStatus(Status.DUE);
+		for (Item item : items) {
+			System.out.println(item.getDateDue() + "   " + current);
+			if (formatter.format(item.getDateDue()).equals(formatter.format(current))) {
+				item.setStatus(Status.DUETODAY);
+				itemRepo.save(item);
+			}
+		}
 	}
 	
 	public void delete(long id) {
