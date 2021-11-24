@@ -1,7 +1,8 @@
 package com.qa.ToDoList.Services;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,6 @@ public class ItemService {
 
 	private UserRepository userRepo;
 	private ItemRepository itemRepo;
-	
-	private SimpleDateFormat formatter= new SimpleDateFormat("MM-dd");
 	
 	@Autowired
 	public ItemService(UserRepository userRepo, ItemRepository itemRepo) {
@@ -103,13 +102,21 @@ public class ItemService {
 	}
 	
 	public void updateStatus() {
-		Date current = new Date(System.currentTimeMillis());
 		List<Item> items = itemRepo.findAllByStatus(Status.DUE);
+		items.addAll(itemRepo.findAllByStatus(Status.DUETODAY));
+		
+		LocalDate localDate = LocalDate.now();
+        Date currentDate = (Date) Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		
 		for (Item item : items) {
-			System.out.println(item.getDateDue() + "   " + current);
-			if (formatter.format(item.getDateDue()).equals(formatter.format(current))) {
-				item.setStatus(Status.DUETODAY);
-				itemRepo.save(item);
+			int dif = item.getDateDue().compareTo(currentDate);
+            if (dif == 0){
+                item.setStatus(Status.DUETODAY);
+                itemRepo.save(item);
+            } else if (dif < 0){
+            	item.setStatus(Status.LATE);
+                itemRepo.save(item);
 			}
 		}
 	}
