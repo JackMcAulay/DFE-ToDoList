@@ -121,7 +121,14 @@ public class ItemService {
 		}
 	}
 	
-	public void delete(long id) {
-		itemRepo.deleteById(id);
+	public void deleteCompleted(long userId) {
+		List<Item> items = itemRepo.findAllByStatus(Status.COMPLETED);
+		for (Item item : items) {
+			this.delete(item.getID());
+		}
+	}
+	
+	public void delete(long itemId) {
+		itemRepo.deleteById(itemId);
 	}
 }

@@ -73,4 +73,16 @@ public class ItemController {
 		service.delete(itemId);
 		return "Item " + itemId + " Deleted";
 	}
+	
+	@PostMapping("/deleteCompleted/{userId}")
+	public String deleteCompleted(@PathVariable long userId) {
+		service.deleteByStatus(userId, Status.COMPLETED);
+		return "Complted Items Deleted";
+	}
+	
+	@PostMapping("/deleteLate/{userId}")
+	public String deleteLate(@PathVariable long userId) {
+		service.deleteByStatus(userId, Status.LATE);
+		return "Complted Items Deleted";
+	}
 }
