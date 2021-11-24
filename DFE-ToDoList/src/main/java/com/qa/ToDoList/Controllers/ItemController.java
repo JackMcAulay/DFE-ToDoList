@@ -73,4 +73,10 @@ public class ItemController {
 		service.delete(itemId);
 		return "Item " + itemId + " Deleted";
 	}
+	
+	@PostMapping("/deleteComplted/{userId}")
+	public String deleteCompleted(@PathVariable long userId) {
+		service.deleteCompleted(userId);
+		return "Complted Items Deleted";
+	}
 }
