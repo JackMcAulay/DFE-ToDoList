@@ -111,7 +111,7 @@ public class ItemService {
 		
 		for (Item item : items) {
 			int dif = item.getDateDue().compareTo(currentDate);
-            if (dif == 0){
+            if (dif == 0 && item.getStatus() != Status.DUETODAY){
                 item.setStatus(Status.DUETODAY);
                 itemRepo.save(item);
             } else if (dif < 0){
