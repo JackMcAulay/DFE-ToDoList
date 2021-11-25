@@ -86,7 +86,6 @@ public class ItemService {
 		List<Item> items = new ArrayList<Item>();
 		List<Item> allItems = itemRepo.findAllByUserId(userId);
 		for (Item item : allItems) {
-			System.out.println(item.getTags());
 			if (item.getTags().contains(tag)) {
 				items.add(item);
 			}
