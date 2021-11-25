@@ -86,7 +86,6 @@ public class ItemService {
 		List<Item> items = new ArrayList<Item>();
 		List<Item> allItems = itemRepo.findAllByUserId(userId);
 		for (Item item : allItems) {
-			System.out.println(item.getTags());
 			if (item.getTags().contains(tag)) {
 				items.add(item);
 			}
@@ -121,8 +120,8 @@ public class ItemService {
 		}
 	}
 	
-	public void deleteCompleted(long userId) {
-		List<Item> items = itemRepo.findAllByStatus(Status.COMPLETED);
+	public void deleteByStatus(long userId, Status state) {
+		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
 		for (Item item : items) {
 			this.delete(item.getID());
 		}
