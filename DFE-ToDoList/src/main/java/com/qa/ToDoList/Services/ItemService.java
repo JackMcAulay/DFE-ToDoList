@@ -121,8 +121,8 @@ public class ItemService {
 		}
 	}
 	
-	public void deleteCompleted(long userId) {
-		List<Item> items = itemRepo.findAllByStatus(Status.COMPLETED);
+	public void deleteByStatus(long userId, Status state) {
+		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
 		for (Item item : items) {
 			this.delete(item.getID());
 		}
