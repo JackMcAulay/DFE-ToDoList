@@ -18,8 +18,8 @@ import com.qa.ToDoList.Entities.UserRepository;
 
 @SpringBootTest
 public class UserServiceTests {
-	private static User testUser;
-	private static UserDTO testUserDTO;
+	private static User testUser = new User(1L, "John", "Smith", "jsmith@gmail.com");
+	private static UserDTO testUserDTO = new UserDTO();
 	private static List<User> testUserList;
 	private static List<UserDTO> testUserListDTO;
 	
@@ -31,8 +31,6 @@ public class UserServiceTests {
 	
 	@BeforeAll
 	public static void before() {
-		testUser = new User(1L, "John", "Smith", "jsmith@gmail.com");
-		testUserDTO = new UserDTO();
 		testUserDTO.setID(1L);
 		testUserDTO.setFullName("John Smith");
 		testUserDTO.setEmail("jsmith@gmail.com");

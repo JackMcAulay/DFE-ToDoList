@@ -47,9 +47,10 @@ public class Item {
     @CollectionTable(name="listOfTags")
 	private List<String> tags;
 
-	public Item(long iD, String itemTitle, String itemContents, Date dueDate, List<String> tags) {
+	public Item(long ID, long userId, String itemTitle, String itemContents, Date dueDate, List<String> tags) {
 		super();
-		ID = iD;
+		this.ID = ID;
+		this.userId = userId;
 		this.itemTitle = itemTitle;
 		this.itemContents = itemContents;
 		this.dateDue = dueDate;

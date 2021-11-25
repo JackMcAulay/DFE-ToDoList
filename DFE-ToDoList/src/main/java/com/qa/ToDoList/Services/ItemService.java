@@ -35,7 +35,7 @@ public class ItemService {
 		ItemDTO dto = new ItemDTO();
 		User user = userRepo.findUserByID(item.getUserId());
 		dto.setID(item.getID());
-		dto.setItemAuthor(user.getFirstName() + " " + user.getLastName());
+		//dto.setItemAuthor(user.getFirstName() + " " + user.getLastName());
 		dto.setItemTitle(item.getItemTitle());
 		dto.setItemContents(item.getItemContents());
 		dto.setDateCreated(item.getDateCreated());
