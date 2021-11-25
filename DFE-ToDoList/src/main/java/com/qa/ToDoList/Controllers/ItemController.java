@@ -32,7 +32,7 @@ public class ItemController {
 		return service.create(item);
 	}
 	
-	@GetMapping("/readAllItem")
+	@GetMapping("/readAllItems")
 	public List<ItemDTO> readAll() {
 	    return service.readAll();
 	}
@@ -42,17 +42,17 @@ public class ItemController {
 	    return service.readById(itemId);
 	}
 	
-	@GetMapping("/readAllItemByUser/{userId}")
+	@GetMapping("/readUserTDL/{userId}")
 	public List<ItemDTO> readAllByUser(@PathVariable long userId) {
 	    return service.readAllByUser(userId);
 	}
 	
-	@GetMapping("/readAllByStatus/{userId}/{state}")
+	@GetMapping("/readUserTDLByStatus/{userId}/{state}")
 	public List<ItemDTO> readAllByStatus(@PathVariable long userId, @PathVariable Status state) {
 	    return service.readAllByStatus(userId, state);
 	}
 	
-	@GetMapping("/readAllByTag/{userId}/{tag}")
+	@GetMapping("/readUserTDLByTag/{userId}/{tag}")
 	public List<ItemDTO> readAllByStatus(@PathVariable long userId, @PathVariable String tag) {
 	    return service.readAllByTag(userId, tag);
 	}
@@ -83,6 +83,6 @@ public class ItemController {
 	@PostMapping("/deleteLate/{userId}")
 	public String deleteLate(@PathVariable long userId) {
 		service.deleteByStatus(userId, Status.LATE);
-		return "Complted Items Deleted";
+		return "Late Items Deleted";
 	}
 }
