@@ -30,9 +30,6 @@ public class ItemServiceTests {
 	
 	public List<Item> testItemList = new ArrayList<Item>();
 	public List<ItemDTO> testItemDTOList = new ArrayList<ItemDTO>();
-
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private ItemService itemService;
@@ -58,6 +55,8 @@ public class ItemServiceTests {
 	
 	@Test
 	void createTest() {	
+		//Comment out line 38 in ItemService
+		
 		Mockito.when(this.itemRepo.save(testItem)).thenReturn(testItem);
 		Assertions.assertThat(this.itemService.create(testItem)).isEqualTo(mapToDTO(testItem));
 		Mockito.verify(this.itemRepo, Mockito.times(1)).save(testItem);
