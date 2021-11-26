@@ -14,7 +14,7 @@
 	<name>DFE-ToDoList</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -67,7 +67,18 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        	<plugin>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+    			<configuration>
+        			<mainClass>com.qa.ToDoList.DfeToDoListApplication</mainClass>
+        			<layout>ZIP</layout>
+    			</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
