@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.ToDoList.DTOs.ItemDTO;
 import com.qa.ToDoList.Entities.Item;
-import com.qa.ToDoList.Entities.User;
+//import com.qa.ToDoList.Entities.User;
 import com.qa.ToDoList.Entities.ItemRepository;
 import com.qa.ToDoList.Entities.UserRepository;
 import com.qa.ToDoList.Enums.Status;
@@ -21,19 +21,19 @@ import com.qa.ToDoList.Enums.Status;
 @Service
 public class ItemService {
 
-	private UserRepository userRepo;
+	//private UserRepository userRepo;
 	private ItemRepository itemRepo;
 	
 	@Autowired
 	public ItemService(UserRepository userRepo, ItemRepository itemRepo) {
 		super();
-		this.userRepo = userRepo;
+		//this.userRepo = userRepo;
 		this.itemRepo = itemRepo;
 	}
 	
 	public ItemDTO mapToDTO(Item item) {
 		ItemDTO dto = new ItemDTO();
-		User user = userRepo.findUserByID(item.getUserId());
+		//User user = userRepo.findUserByID(item.getUserId());
 		dto.setID(item.getID());
 		//dto.setItemAuthor(user.getFirstName() + " " + user.getLastName());
 		dto.setItemTitle(item.getItemTitle());
@@ -122,7 +122,7 @@ public class ItemService {
 	}
 	
 	public void deleteByStatus(long userId, Status state) {
-		List<Item> items = itemRepo.findAllByStatus(state);
+		List<Item> items = itemRepo.findAllByUserIdAndStatus(userId, state);
 		for (Item item : items) {
 			this.delete(item.getID());
 		}

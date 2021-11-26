@@ -55,7 +55,7 @@ public class ItemServiceTests {
 	
 	@Test
 	void createTest() {	
-		//Comment out line 38 in ItemService
+		//Comment out lines 16, 24, 30, 36, 38 in ItemService
 		
 		Mockito.when(this.itemRepo.save(testItem)).thenReturn(testItem);
 		Assertions.assertThat(this.itemService.create(testItem)).isEqualTo(mapToDTO(testItem));
