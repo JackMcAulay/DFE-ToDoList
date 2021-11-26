@@ -111,6 +111,8 @@
 
 ![Tags](https://i.imgur.com/Y4ZzZAA.png)
 
+![image](https://user-images.githubusercontent.com/47449092/143584065-c1446b9b-9619-4e6a-b741-8a760f2afa71.png)
+
 ## Screenshots of Test results and coverage report.
 ![Test Results](https://i.imgur.com/B8ciKky.png)
 ![Coverage Report](https://i.imgur.com/SpDhS8N.png)
