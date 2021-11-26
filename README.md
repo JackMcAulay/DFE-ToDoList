@@ -20,6 +20,7 @@
   - Allow a user to have Multiple separate Lists.
 
 ## API Calls & Screenshots of Postman Requests and Output.
+### User API Calls
 - /createUser
   - Post - Sent with User in JSON format.
 
@@ -50,6 +51,56 @@
 
 ![Delete User](https://i.imgur.com/8i9ITck.png)
 ![Delete User Result](https://i.imgur.com/o8WRjgs.png)
+### ToDoList/Item API Calls
+- /createItem
+  - Post - Sent with Item in JSON format.
+
+![Create Item](https://i.imgur.com/s2z1lRl.png)
+
+- /readItemById/{itemId}
+  - Get - Sent with ItemId.
+
+![Read Item](https://i.imgur.com/YpTO3od.png)
+
+- /readUserTDL/{userId}
+  - Get - Sent with UserId.
+
+![Read TDL](https://i.imgur.com/1Lej7qM.png)
+
+- /readUserTDLByStatus/{userId}/{Status}
+  - Get - Sent with UserId & Status (DUE, DUETODAY, LATE, COMPLETED).
+
+![Read TDL By Status](https://i.imgur.com/D2rKFT1.png)
+
+- /readUserTDLByTag/{userId}/{Tag}
+  - Get - Sent with UserId & a Tag.
+
+![Read TDL By Tag](https://i.imgur.com/iiGjuPW.png)
+
+- /updateItem/{itemId}
+  - Get - Sent with ItemId.
+
+![Update Item](https://i.imgur.com/EmByOnV.png)
+
+- /completeItem/{itemId}
+  - Post - Sent with ItemId.
+
+![Update Item](https://i.imgur.com/RfAx0rL.png)
+
+- /deleteItem/{itemId}
+  - Post - Sent with ItemId.
+
+![Update Item](https://i.imgur.com/kWXnEoa.png)
+
+- /deleteLate/{userId}
+  - Post - Sent with ItemId.
+
+![Update Item](https://i.imgur.com/yyyQ5lh.png)
+
+- /deleteCompleted/{userId}
+  - Post - Sent with ItemId.
+
+![Update Item](https://i.imgur.com/vy8UkRt.png)
 
 ## Screenshots of Database
 
